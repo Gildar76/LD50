@@ -59,3 +59,5 @@ sysinfo.txt
 crashlytics-build.properties
 
 Assets/*
+# List folders in assets you don't want to ignore here.
+!Assets/_[Ll]D50/
