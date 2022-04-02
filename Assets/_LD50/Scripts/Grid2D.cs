@@ -10,6 +10,7 @@ namespace GildarGaming.LD50
         public int height;
         public GridNode[,] grid;
 
+
         public Grid2D(int width, int height)
         {
             this.width = width;
@@ -59,6 +60,15 @@ namespace GildarGaming.LD50
                     grid[x, y] = null;
                 }
             }
+        }
+        public bool IsWalkable(int x, int y)
+        {
+            if (Get(x, y).Occupied)
+            {
+                return false;
+            }
+
+            return true;
         }
 
     }       

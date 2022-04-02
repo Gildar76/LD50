@@ -15,6 +15,7 @@ namespace GildarGaming.LD50
         
         public void Awake()
         {
+            grid = new Grid2D(40, 40);
         }
         
         public void Start()
@@ -46,7 +47,7 @@ namespace GildarGaming.LD50
                 //Debug.Log("Grass Tile: " + grassTile.transform.position);
             } 
 
-            grid = new Grid2D(40, 40);
+            
             for (int i = 0; i < 40; i++)
             {
                 for (int j = 0; j < 40; j++)
