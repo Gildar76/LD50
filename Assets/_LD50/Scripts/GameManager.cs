@@ -63,6 +63,7 @@ namespace GildarGaming.LD50
                         {
                             node.IsWalkable = false;
                             node.Occupied = true;
+                            node.occupiedBy = treeTile;
                         }
 
                     }

@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 4680906281104806656}
   - component: {fileID: 5931563056187695576}
   - component: {fileID: -3411596267682780283}
-  m_Layer: 0
+  - component: {fileID: 7774661725109696733}
+  - component: {fileID: 4429723732593693411}
+  m_Layer: 8
   m_Name: Fireeffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4827,6 +4829,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBurning: 0
+--- !u!114 &7774661725109696733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5566840499052109896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55dcf22d156922e449067a3141647d69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 100
+  isDead: 0
+--- !u!58 &4429723732593693411
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5566840499052109896}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &5846819283818330014
 GameObject:
   m_ObjectHideFlags: 0
@@ -4836,7 +4869,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8522516163530120058}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}

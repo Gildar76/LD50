@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 namespace GildarGaming.LD50
 {
@@ -13,7 +14,9 @@ namespace GildarGaming.LD50
         public float speed = 0.25f;
         public float rotationSPeed = 10f;
         private bool waterCannonON;
-
+        [SerializeField] LayerMask weaponHitLayer;
+        float weaponTimer = 0;
+        float weaponDelay = 1f;
         private void Start()
         {
             grid = GameManager.grid;
@@ -51,6 +54,12 @@ namespace GildarGaming.LD50
             if (waterCannonON)
             {
                 waterStorage -= 2 * Time.deltaTime;
+                weaponTimer += Time.deltaTime;
+                if (weaponTimer > weaponDelay)
+                {
+                    DealDamage();
+                    weaponTimer = 0;
+                }
             }
             if (Input.GetKeyUp(KeyCode.Space) || waterStorage <= 0)
             {
@@ -60,6 +69,18 @@ namespace GildarGaming.LD50
             }
         }
 
-
+        private void DealDamage()
+        {
+            var hit = Physics2D.Raycast(transform.position, transform.forward, 1.5f, weaponHitLayer);
+            if (hit.collider != null)
+            {
+                Health health = hit.collider.GetComponent<Health>();
+                if (health != null)
+                {
+                    health.TakeDamage(10);
+                    Debug.Log("Dealing damage");
+                }
+            }
+        }
     }
 }

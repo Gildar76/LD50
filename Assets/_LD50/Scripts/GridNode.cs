@@ -32,5 +32,8 @@ namespace GildarGaming.LD50
         }
 
         public bool IsWalkable { get; internal set; }
+        public GameObject OccupiedBy { get; internal set; }
+
+        public GameObject occupiedBy;
     }
 }

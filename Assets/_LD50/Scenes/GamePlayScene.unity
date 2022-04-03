@@ -26981,6 +26981,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePrefab: {fileID: 5566840499052109896, guid: 2797361be0f1e7141849d972f1286e32, type: 3}
+  burntGroundPrefab: {fileID: 579705875468432300, guid: ab0afdb07155df542a9e319a7882679e, type: 3}
   fireStartPositions:
   - {x: 2, y: 10}
   - {x: 16, y: 22}
@@ -37092,8 +37093,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3546a1e30a94d94fba28292213e2423, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waterStorage: 200
+  collissionMask:
+    serializedVersion: 2
+    m_Bits: 192
   speed: 1
   rotationSPeed: 55
+  weaponHitLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1001 &1534463362
 PrefabInstance:
   m_ObjectHideFlags: 0
