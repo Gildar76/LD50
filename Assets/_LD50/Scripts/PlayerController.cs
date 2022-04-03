@@ -7,7 +7,7 @@ namespace GildarGaming.LD50
 {
     public class PlayerController : MonoBehaviour
     {
-        public float waterStorage = 200f;
+        
         public LayerMask collissionMask;
         Grid2D grid;
         ParticleSystem waterEffect;
@@ -17,6 +17,7 @@ namespace GildarGaming.LD50
         [SerializeField] LayerMask weaponHitLayer;
         float weaponTimer = 0;
         float weaponDelay = 1f;
+
         private void Start()
         {
             grid = GameManager.grid;
@@ -46,14 +47,16 @@ namespace GildarGaming.LD50
 
             }
             
-            if (Input.GetKeyDown(KeyCode.Space) && waterStorage > 0)
+            if (Input.GetKeyDown(KeyCode.Space) && GameManager.Instance.WaterStorage > 0)
             {
                 waterCannonON = true;
                 waterEffect.Play();
             }
             if (waterCannonON)
             {
-                waterStorage -= 2 * Time.deltaTime;
+                GameManager.Instance.WaterStorage -= 2 * Time.deltaTime;
+                 
+
                 weaponTimer += Time.deltaTime;
                 if (weaponTimer > weaponDelay)
                 {
@@ -61,7 +64,7 @@ namespace GildarGaming.LD50
                     weaponTimer = 0;
                 }
             }
-            if (Input.GetKeyUp(KeyCode.Space) || waterStorage <= 0)
+            if (Input.GetKeyUp(KeyCode.Space) || GameManager.Instance.WaterStorage <= 0)
             {
                 waterCannonON = false;
                 waterEffect.Stop();

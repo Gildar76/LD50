@@ -22,6 +22,7 @@ namespace GildarGaming.LD50
         {
             if (fireHealth.IsDead)
             {
+                GameManager.Instance.Money += 50;
                 isBurning = false;
                 node.IsOnFire = false;
                 FireManager.Instance.AddFireBackToPool(this.gameObject);
@@ -47,7 +48,7 @@ namespace GildarGaming.LD50
                     if (targetHealth.IsDead)
                     {
 
-
+                        
                         isBurning = false;
                         
                         targetHealth.gameObject.SetActive(false);
