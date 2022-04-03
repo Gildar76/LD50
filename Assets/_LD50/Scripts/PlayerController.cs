@@ -6,11 +6,14 @@ namespace GildarGaming.LD50
 {
     public class PlayerController : MonoBehaviour
     {
+        public float waterStorage = 200f;
         public LayerMask collissionMask;
         Grid2D grid;
         ParticleSystem waterEffect;
         public float speed = 0.25f;
         public float rotationSPeed = 10f;
+        private bool waterCannonON;
+
         private void Start()
         {
             grid = GameManager.grid;
@@ -40,15 +43,18 @@ namespace GildarGaming.LD50
 
             }
             
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) && waterStorage > 0)
             {
-
-                    waterEffect.Play();
-                
+                waterCannonON = true;
+                waterEffect.Play();
             }
-            if (Input.GetKeyUp(KeyCode.Space))
+            if (waterCannonON)
             {
-
+                waterStorage -= 2 * Time.deltaTime;
+            }
+            if (Input.GetKeyUp(KeyCode.Space) || waterStorage <= 0)
+            {
+                waterCannonON = false;
                 waterEffect.Stop();
 
             }
