@@ -18,6 +18,16 @@ namespace GildarGaming.LD50
         {
             fireHealth = GetComponent<Health>();
         }
+        private void OnEnable()
+        {
+            GetComponent<AudioSource>().loop = true;
+            GetComponent<AudioSource>().Play();
+        }
+        private void OnDisable()
+        {
+            GetComponent<AudioSource>().loop = false;
+            GetComponent<AudioSource>().Stop();
+        }
         private void Update()
         {
             if (fireHealth.IsDead)
@@ -38,7 +48,7 @@ namespace GildarGaming.LD50
                     if (targetHealth == null)
                     {
                         GameObject go = node.occupiedBy;
-                        Debug.Log(go.name);
+                        //Debug.Log(go.name);
                         if (go != null)
                         {
                            targetHealth = go.GetComponent<Health>();

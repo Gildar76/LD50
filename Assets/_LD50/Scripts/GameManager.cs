@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using UnityEngine.SceneManagement;
 
 namespace GildarGaming.LD50
 {
@@ -23,6 +24,9 @@ namespace GildarGaming.LD50
         public float moneyTimer = 0;
         public float moneyUpdateDelay = 5f;
         public float moneyToAdd = 5f;
+        public AudioSource waterBombingAudio;
+        GameObject[] housees;
+        List<Health> houseHealth;
         public float WaterStorage { 
             get { return waterStorage; } set { 
                 waterStorage = value; 
@@ -58,11 +62,18 @@ namespace GildarGaming.LD50
         
         public void Start()
         {
+            houseHealth = new List<Health>();
             BuildGrid();
+            housees = GameObject.FindGameObjectsWithTag("House");
+            foreach (var house in housees)
+            {
+                houseHealth.Add(house.GetComponent<Health>());
+            }
         }
 
         internal void WaterBomb()
         {
+            waterBombingAudio.Play();
             List<Fire> fires = FireManager.Instance.ActiveFires;
             for (int i = 0; i < 5; i++)
             {
@@ -73,6 +84,7 @@ namespace GildarGaming.LD50
                     fire.GetComponent<Health>().TakeDamage(250);
                 }
             }
+            Money -= 500;
         }
 
         public void OnEnable()
@@ -92,9 +104,28 @@ namespace GildarGaming.LD50
                 
                 moneyTimer = 0;
                 Money += moneyToAdd;
+                //Do house check here as well.
+                bool gameOver = true;
+                foreach (var health in houseHealth)
+                {
+                    if (!health.IsDead)
+                    {
+                        gameOver = false;
+                        break;
+                    }
+                }
+                if (gameOver)
+                {
+                    LoadGameOverScene();
+                }
             }
         }
-        
+
+        private void LoadGameOverScene()
+        {
+            SceneManager.LoadScene(2);
+        }
+
         public void OnDestroy()
         {
         }

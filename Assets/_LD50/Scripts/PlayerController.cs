@@ -88,12 +88,16 @@ namespace GildarGaming.LD50
 
         private void DealDamage()
         {
-            var hit = Physics2D.Raycast(transform.position, transform.forward, 1.5f, weaponHitLayer);
+            var hit = Physics2D.Raycast(transform.position, transform.forward, 3f, weaponHitLayer);
+            
+            
             if (hit.collider != null)
             {
+                
                 Health health = hit.collider.GetComponent<Health>();
                 if (health != null)
                 {
+                    
                     health.TakeDamage(10);
                     
                 }
