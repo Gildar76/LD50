@@ -17,9 +17,11 @@ namespace GildarGaming.LD50
         [SerializeField] LayerMask weaponHitLayer;
         float weaponTimer = 0;
         float weaponDelay = 1f;
-
+        public AudioSource waterAudio;
+        public AudioSource engineAudio;
         private void Start()
         {
+            
             grid = GameManager.grid;
             waterEffect = GetComponentInChildren<ParticleSystem>();
 
@@ -35,9 +37,13 @@ namespace GildarGaming.LD50
                 Vector3 newPosition = transform.position + transform.up * speed * Time.deltaTime; ;
                 if (!Physics2D.Raycast(transform.position, transform.up, speed * Time.deltaTime, collissionMask))
                 {
+                    if (!engineAudio.isPlaying)
+                    {
+                        engineAudio.Play();
+                    }
                     transform.position = newPosition;
                 }
-                Debug.DrawRay(transform.position, transform.up * newPosition.y, Color.red);
+                
 
                 //if (grid.IsWalkable((int)newPosition.x, (int)newPosition.y))
                 //{
@@ -45,12 +51,19 @@ namespace GildarGaming.LD50
                 //}
 
 
+            } else
+            {
+                engineAudio.Stop();
             }
             
             if (Input.GetKeyDown(KeyCode.Space) && GameManager.Instance.WaterStorage > 0)
             {
                 waterCannonON = true;
                 waterEffect.Play();
+                if (!waterAudio.isPlaying)
+                {
+                    waterAudio.Play();
+                }
             }
             if (waterCannonON)
             {
@@ -68,6 +81,7 @@ namespace GildarGaming.LD50
             {
                 waterCannonON = false;
                 waterEffect.Stop();
+                waterAudio.Stop();
 
             }
         }
@@ -81,7 +95,7 @@ namespace GildarGaming.LD50
                 if (health != null)
                 {
                     health.TakeDamage(10);
-                    Debug.Log("Dealing damage");
+                    
                 }
             }
         }

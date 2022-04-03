@@ -18,7 +18,7 @@ namespace GildarGaming.LD50
         List<Fire> activeFires = new List<Fire>();
         float spreadChance = 0.1f;
         [SerializeField] List<Vector2Int> fireStartPositions;
-
+        public List<Fire> ActiveFires { get { return activeFires; } }
         private List<Fire> fires;
         private void Awake()
         {

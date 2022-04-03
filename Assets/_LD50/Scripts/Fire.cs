@@ -38,30 +38,35 @@ namespace GildarGaming.LD50
                     if (targetHealth == null)
                     {
                         GameObject go = node.occupiedBy;
+                        Debug.Log(go.name);
                         if (go != null)
                         {
                            targetHealth = go.GetComponent<Health>();
                         }
-                    }
-                    targetHealth.TakeDamage(burnDamage);
-                    
-                    if (targetHealth.IsDead)
+                    } else
                     {
+                        targetHealth.TakeDamage(burnDamage);
+                        if (targetHealth.IsDead)
+                        {
 
-                        
-                        isBurning = false;
-                        
-                        targetHealth.gameObject.SetActive(false);
-                        //if (FireManager.Instance == null) Debug.Log("FireManager is null");
-                        GameObject go = FireManager.Instance.GetBurntGround();
-                        
-                        go.transform.position = transform.position;
-                        node.occupiedBy = go;
-                        node.Occupied = false;
-                        go.SetActive(true);
 
-                        this.gameObject.SetActive(false);
+                            isBurning = false;
+
+                            targetHealth.gameObject.SetActive(false);
+                            //if (FireManager.Instance == null) Debug.Log("FireManager is null");
+                            GameObject go = FireManager.Instance.GetBurntGround();
+
+                            go.transform.position = transform.position;
+                            node.occupiedBy = go;
+                            node.Occupied = false;
+                            go.SetActive(true);
+
+                            this.gameObject.SetActive(false);
+                        }
                     }
+                    
+                    
+
                 }
             }
         }

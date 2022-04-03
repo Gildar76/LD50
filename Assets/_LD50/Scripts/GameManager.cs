@@ -63,7 +63,16 @@ namespace GildarGaming.LD50
 
         internal void WaterBomb()
         {
-            throw new NotImplementedException();
+            List<Fire> fires = FireManager.Instance.ActiveFires;
+            for (int i = 0; i < 5; i++)
+            {
+                int randomNumber = UnityEngine.Random.Range(0, fires.Count);
+                Fire fire = fires[randomNumber];
+                if (fire != null)
+                {
+                    fire.GetComponent<Health>().TakeDamage(250);
+                }
+            }
         }
 
         public void OnEnable()
@@ -93,12 +102,17 @@ namespace GildarGaming.LD50
         {
             GameObject[] grassTiles = GameObject.FindGameObjectsWithTag("Grass");
             GameObject[] treeTiles = GameObject.FindGameObjectsWithTag("Tree");
-            foreach (var grassTile in grassTiles)
+            GameObject[] houseTiles = GameObject.FindGameObjectsWithTag("House");
+            foreach (var houseTile in houseTiles)
             {
                 //Debug.Log("Grass Tile: " + grassTile.transform.position);
-            } 
+            }
+            foreach (var houseti in grassTiles)
+            {
+                //Debug.Log("Grass Tile: " + grassTile.transform.position);
+            }
 
-            
+
             for (int i = 0; i < 40; i++)
             {
                 for (int j = 0; j < 40; j++)
@@ -108,6 +122,16 @@ namespace GildarGaming.LD50
                     node.IsBurned = false;
                     node.IsOnFire = false;
                     node.IsWalkable = true;
+                    foreach (var houseti in houseTiles)
+                    {
+                        if ((int)houseti.transform.position.x == (int)node.Position.x && (int)houseti.transform.position.y == (int)node.Position.y)
+                        {
+                            node.IsWalkable = false;
+                            node.Occupied = true;
+                            node.occupiedBy = houseti;
+                        }
+                    }
+
                     foreach (GameObject treeTile in treeTiles)
                     {
                         if ((int)treeTile.transform.position.x == (int)node.Position.x && (int)treeTile.transform.position.y == (int)node.Position.y)
