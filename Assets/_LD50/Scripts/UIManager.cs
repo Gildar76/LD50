@@ -63,7 +63,7 @@ namespace GildarGaming.LD50
         public void OnBuyWaterCkick()
         {
             GameManager.Instance.WaterStorage += 100;
-            GameManager.Instance.Money -= 500;
+            GameManager.Instance.Money -= 100;
             
         }
     }

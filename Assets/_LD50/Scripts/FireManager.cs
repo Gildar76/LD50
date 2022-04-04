@@ -13,7 +13,7 @@ namespace GildarGaming.LD50
         Queue<GameObject> firePool = new Queue<GameObject>();
         Queue<GameObject> burntGroundPool = new Queue<GameObject>();
         [SerializeField] private GameObject burntGroundPrefab;
-        float fireSpreadDelay = 10f;
+        float fireSpreadDelay = 15f;
         float fireSpreadTimer = 0f;
         List<Fire> activeFires = new List<Fire>();
         float spreadChance = 0.1f;
@@ -124,6 +124,8 @@ namespace GildarGaming.LD50
 
         public void AddFireBackToPool(GameObject fire)
         {
+            Fire fireComponent = fire.GetComponent<Fire>();
+            activeFires.Remove(fireComponent);
             firePool.Enqueue(fire);
         }
     }

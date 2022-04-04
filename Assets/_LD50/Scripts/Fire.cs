@@ -20,8 +20,12 @@ namespace GildarGaming.LD50
         }
         private void OnEnable()
         {
-            GetComponent<AudioSource>().loop = true;
-            GetComponent<AudioSource>().Play();
+            if (FireManager.Instance.ActiveFires.Count < 10)
+            {
+                GetComponent<AudioSource>().loop = true;
+                GetComponent<AudioSource>().Play();
+            }
+
         }
         private void OnDisable()
         {
@@ -36,6 +40,7 @@ namespace GildarGaming.LD50
                 isBurning = false;
                 node.IsOnFire = false;
                 FireManager.Instance.AddFireBackToPool(this.gameObject);
+                
                 this.gameObject.SetActive(false);
                 
             }
