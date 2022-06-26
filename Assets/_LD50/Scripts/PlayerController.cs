@@ -19,6 +19,7 @@ namespace GildarGaming.LD50
         float weaponDelay = 1f;
         public AudioSource waterAudio;
         public AudioSource engineAudio;
+        public ParticleSystem hitEffect;
         private void Start()
         {
             
@@ -60,6 +61,8 @@ namespace GildarGaming.LD50
             {
                 waterCannonON = true;
                 waterEffect.Play();
+                hitEffect.Stop();
+                
                 if (!waterAudio.isPlaying)
                 {
                     waterAudio.Play();
@@ -74,6 +77,7 @@ namespace GildarGaming.LD50
                 if (weaponTimer > weaponDelay)
                 {
                     DealDamage();
+                    
                     weaponTimer = 0;
                 }
             }
@@ -97,7 +101,7 @@ namespace GildarGaming.LD50
                 Health health = hit.collider.GetComponent<Health>();
                 if (health != null)
                 {
-                    
+                    hitEffect.Play();
                     health.TakeDamage(10);
                     
                 }
